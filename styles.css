@@ -1,0 +1,29 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+:root {
+  --main: grey;
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.content {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.cardItem {
+  width: 35vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

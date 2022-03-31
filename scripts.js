@@ -89,6 +89,7 @@ const renderPage = async () => {
 }
 
 const updateBGColor = (weather) => {
+  //needs to be switched to the icon code because it includes day/night
   switch (weather) {
     case 'clear sky':
       root.style.setProperty('--main', 'darkgrey');

@@ -1,10 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Karla:wght@300&family=Red+Hat+Mono:wght@300&display=swap");
 * {
   margin: 0px;
   padding: 0px;
 }
 
 :root {
-  --main: grey;
+  /*  Base Values  */
+  --primary-color-h: 265;
+  --primary-color-s: 100%;
+  --primary-color-l: 47%;
+
+  /*  Calculations Based on Lightness  */
+  --lightnessTransform: 10%;
+  --darknessTransform: 15%;
+  --primary-color-light-l: calc(
+    var(--primary-color-l) + var(--lightnessTransform)
+  );
+  --primary-color-dark-l: calc(
+    var(--primary-color-l) - var(--darknessTransform)
+  );
+
+  --color-primary: hsl(
+    var(--primary-color-h),
+    var(--primary-color-s),
+    var(--primary-color-l)
+  );
+  --color-primary-dark: hsl(
+    var(--primary-color-h),
+    var(--primary-color-s),
+    var(--primary-color-dark-l)
+  );
+
+  --color-primary-light: hsl(
+    var(--primary-color-h),
+    var(--primary-color-s),
+    var(--primary-color-light-l)
+  );
 }
 
 .wrapper {
@@ -12,6 +43,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background: var(--color-primary);
 }
 
 .content {
@@ -21,9 +53,47 @@
   justify-content: space-around;
 }
 
+.pokemonContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cardItem {
   width: 35vh;
+  margin: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-family: "Karla", sans-serif;
+}
+
+.header {
+  display: flex;
+  background: var(--color-primary-dark);
+  font-family: "Red Hat Mono", monospace;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  background: var(--color-primary-dark);
+  font-family: "Karla", sans-serif;
+}
+
+.pokemonName {
+  font-family: "Gloria Hallelujah", cursive;
+  margin: 40px;
+  text-transform: capitalize;
+  letter-spacing: 5px;
+  font-size: 3em;
+}
+.descriptionValue {
+  font-family: "Gloria Hallelujah";
+}
+.logo,
+.locationValue {
+  font-family: "Gloria Hallelujah", cursive;
+  font-weight: bold;
+  font-size: 1.5em;
 }

@@ -72,6 +72,7 @@
   display: flex;
   background: var(--color-primary-dark);
   font-family: "Red Hat Mono", monospace;
+  justify-content: space-around;
 }
 
 .footer {
@@ -86,8 +87,13 @@
   margin: 40px;
   text-transform: capitalize;
   letter-spacing: 5px;
-  font-size: 3em;
+  font-size: 2.5rem;
 }
+
+.pokemonName::first-letter {
+  font-size: 3.5rem;
+}
+
 .descriptionValue {
   font-family: "Gloria Hallelujah";
 }
@@ -96,4 +102,25 @@
   font-family: "Gloria Hallelujah", cursive;
   font-weight: bold;
   font-size: 1.5em;
+}
+
+.cycleStatus {
+  display: ;
+}
+
+input {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  font-size: 1.75em;
+  font-family: "Karla", sans-serif;
+  padding: 0.25em 0.5em 0.3125em;
+  color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.25em;
+  background: transparent;
+  transition: all 0.1s;
+}
+
+input:focus {
+  outline: none;
+  color: rgba(255, 255, 255, 0.75);
+  border-color: rgba(255, 255, 255, 0.75);
 }

@@ -1,5 +1,7 @@
 // define elements
 const searchBar = document.querySelector(".search");
+const cycler = document.querySelector(".cycler");
+const cycleStatus = document.querySelector(".cycleStatus");
 searchBar.value = "Seattle";
 const locationValue = document.querySelector(".locationValue");
 const timeValue = document.querySelector(".timeValue");
@@ -29,121 +31,191 @@ const windDay = {
   primaryColorH: 150,
   primaryColorS: 62,
   primaryColorL: 62,
+  time: "day",
+  weather: "wind",
 };
 const rainDay = {
   pokemon: "wooper",
   primaryColorH: 210,
   primaryColorS: 100,
   primaryColorL: 75,
+  time: "day",
+  weather: "rain",
 };
 const hotDay = {
   pokemon: "slugma",
   primaryColorH: 0,
   primaryColorS: 100,
   primaryColorL: 60,
+  time: "day",
+  weather: "hot",
 };
 const coldDay = {
-  pokemon: "darumaka",
+  pokemon: "smoochum",
   primaryColorH: 232,
   primaryColorS: 30,
   primaryColorL: 85,
+  time: "day",
+  weather: "cold",
 };
 const sunnyDay = {
   pokemon: "sunflora",
   primaryColorH: 44,
   primaryColorS: 100,
   primaryColorL: 68,
+  time: "day",
+  weather: "sunny",
 };
 const cloudyDay = {
   pokemon: "spearow",
   primaryColorH: 39,
   primaryColorS: 21,
   primaryColorL: 81,
+  time: "day",
+  weather: "cloudy",
 };
 const thunderstormDay = {
   pokemon: "joltik",
-  primaryColorH: 39,
-  primaryColorS: 14,
-  primaryColorL: 20,
+  primaryColorH: 53,
+  primaryColorS: 77,
+  primaryColorL: 47,
+  time: "day",
+  weather: "thunderstorm",
 };
 const mistDay = {
   pokemon: "altaria",
   primaryColorH: 300,
   primaryColorS: 76,
   primaryColorL: 72,
+  time: "day",
+  weather: "mist",
 };
 const snowDay = {
   pokemon: "delibird",
   primaryColorH: 232,
   primaryColorS: 30,
   primaryColorL: 85,
+  time: "day",
+  weather: "snow",
 };
 const smogDay = {
   pokemon: "weezing",
   primaryColorH: 255,
   primaryColorS: 77,
   primaryColorL: 70,
+  time: "day",
+  weather: "smog",
 };
 const clearNight = {
   pokemon: "zubat",
   primaryColorH: 255,
   primaryColorS: 82,
   primaryColorL: 61,
+  time: "night",
+  weather: "clear",
 };
 const cloudNight = {
   pokemon: "murkrow",
   primaryColorH: 255,
   primaryColorS: 82,
   primaryColorL: 61,
+  time: "night",
+  weather: "cloudy",
 };
 const windNight = {
   pokemon: "drifloon",
   primaryColorH: 255,
   primaryColorS: 17,
   primaryColorL: 61,
+  time: "night",
+  weather: "wind",
 };
 const rainNight = {
   pokemon: "palpitoad",
   primaryColorH: 219,
   primaryColorS: 68,
   primaryColorL: 45,
+  time: "night",
+  weather: "rain",
 };
 const hotNight = {
-  pokemon: "hondour",
+  pokemon: "houndour",
   primaryColorH: 0,
   primaryColorS: 23,
   primaryColorL: 38,
+  time: "night",
+  weather: "hot",
 };
 const coldNight = {
   pokemon: "snorunt",
   primaryColorH: 240,
   primaryColorS: 50,
   primaryColorL: 75,
+  time: "night",
+  weather: "cold",
 };
 const thunderstormNight = {
   pokemon: "luxray",
   primaryColorH: 39,
   primaryColorS: 14,
   primaryColorL: 20,
+  time: "night",
+  weather: "thunderstorm",
 };
 const mistNight = {
   pokemon: "spiritomb",
   primaryColorH: 152,
   primaryColorS: 62,
   primaryColorL: 65,
+  time: "night",
+  weather: "mist",
 };
 const snowNight = {
   pokemon: "sneasel",
   primaryColorH: 240,
   primaryColorS: 50,
   primaryColorL: 75,
+  time: "night",
+  weather: "snow",
 };
 const smogNight = {
   pokemon: "gastly",
   primaryColorH: 248,
   primaryColorS: 53,
   primaryColorL: 58,
+  time: "night",
+  weather: "smog",
 };
+const loveDay = {
+  pokemon: "azumarill",
+  primaryColorH: 3,
+  primaryColorS: 77,
+  primaryColorL: 68,
+  time: "love",
+  weather: "day",
+};
+
+const UIArray = [
+  smogDay,
+  smogNight,
+  snowDay,
+  snowNight,
+  thunderstormDay,
+  thunderstormNight,
+  coldDay,
+  coldNight,
+  hotDay,
+  hotNight,
+  rainDay,
+  rainNight,
+  cloudNight,
+  cloudyDay,
+  clearNight,
+  sunnyDay,
+  mistDay,
+  mistNight,
+  loveDay,
+];
 
 weatherKey = "e52935fa1ce4899077609af5e4e8c3f3";
 locationKey = "b08c7331b4b8827fee5babd149132cb8";
@@ -229,6 +301,31 @@ const updateUIColor = (stateObj) => {
   root.style.setProperty("--primary-color-h", stateObj.primaryColorH);
   root.style.setProperty("--primary-color-s", `${stateObj.primaryColorS}%`);
   root.style.setProperty("--primary-color-l", `${stateObj.primaryColorL}%`);
+  cycleStatus.innerText = `${stateObj.weather} ${stateObj.time}`;
+};
+
+const manualUI = async () => {
+  const pokemonFetch = await getPokemon(UIArray[cycleUINum()]);
+  updateUIColor(UIArray[cycleUINum()]);
+  pokemonPic.src = pokemonFetch.sprites.other.dream_world.front_default;
+  pokemonName.innerText = pokemonFetch.name;
+};
+
+const cycleUINum = () => {
+  cycleStatus.style.display = "";
+  console.log(UIArray.length);
+  const matchesArry = (arrItem) =>
+    `${arrItem.weather} ${arrItem.time}` == cycleStatus.innerText;
+  console.log(UIArray.findIndex(matchesArry));
+  let currUIArrNum = UIArray.findIndex(matchesArry);
+  if (currUIArrNum === UIArray.length - 1) {
+    currUIArrNum = -1;
+    // find the current index of the element being used
+    // add one to the index
+    // needs to work repeatedly
+    // might need to add something that checks the length and resets to 0 when needed
+  }
+  return currUIArrNum + 1;
 };
 
 const selectUIRender = (weatherData) => {
@@ -330,3 +427,5 @@ searchBar.addEventListener("keypress", function (e) {
     renderPage();
   }
 });
+
+cycler.addEventListener("click", manualUI);

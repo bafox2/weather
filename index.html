@@ -11,9 +11,11 @@
   <body>
     <div class="wrapper">
       <div class="header">
+        <div class="logoDiv">
         <div class="logo">Pokeweather</div>
         <img class="logoPic" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/air-balloon.png" alt="pokemon">
-        <input type="text" class="search"/>
+        </div>
+        <input type="text" class="search" placeholder="Search here!"/>
       </div>
       <div class='content'>
         <div class="weatherInfoDiv">
@@ -56,11 +58,20 @@
           <div class="pokemonName">description</div>
         </div>
       </div>
-      <dic class="footer">
-        <div class="sources">openweather</div>
-        <div class="githubLlnk">github</div>
-        <div class="githubLlgo">G</div>
-      </footer>
+      <div class="footer">
+        <div class="sources">
+          <div class="openWeather">openWeather</div>
+          <div class="pokeAPI">pokeAPI</div>
+        </div>
+        <div class="githubDiv">
+          <div class="githubLlnk">github</div>
+          <div class="githubLlgo">G</div>
+        </div>
+        <div class="cyclerDiv">
+          <button class="cycler">Change theme manually</button>
+          <div class="cycleStatus"></div>
+        </div>
+    </div>
     </div>
   </body>
 </html>
